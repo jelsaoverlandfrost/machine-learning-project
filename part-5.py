@@ -1,4 +1,4 @@
-# Structured Perceptron
+# Structured Perceptron for POS Tagging
 import numpy as np
 import random
 from collections import Counter, defaultdict
@@ -76,7 +76,9 @@ class StructuredPerceptron(object):
         features = [
             tag,
             previous_tag + '+' + tag,
-            word + '+' + tag
+            word + '+' + tag,
+            'www' in word + '_WWW' + tag,
+            '-' in word + '_DASH' + tag
         ]
         return features
 
@@ -105,46 +107,34 @@ class StructuredPerceptron(object):
             for j in range(tag_number):
                 # checks if we are at end or start
                 tag = tags[j]
-
                 best_score = float('-Inf')
-
                 # for every possible previous tag
                 for k in range(tag_number):
-
                     # k=previous tag
                     previous_tag = tags[k]
-
                     best_before = param_matrix[k, i - 1]  # score until best step before
-
                     features = self.get_features(words[i], tag, previous_tag)
                     feature_weights = sum((self.feature_weights[x] for x in features))
-
                     score = best_before + feature_weights
-
                     if score > best_score:
                         param_matrix[j, i] = score
                         best_score = score
                         back_pointer[j, i] = k  # best tag
-
-        # final best
         best_id = param_matrix[:, -1].argmax()
-
-        ## print best tags in reverse order
-        predtags = []
-        predtags.append(tags[best_id])
+        pred_tags = [tags[best_id]]
 
         for i in range(sentence_length - 1, 0, -1):
             idx = int(back_pointer[best_id, i])
-            predtags.append(tags[idx])
+            pred_tags.append(tags[idx])
             best_id = idx
 
         # return reversed predtags
         # return (words,predtags[::-1])
-        return predtags[::-1]
+        return pred_tags[::-1]
 
     def predict(self, file_name, out_file_name):
         test_file = open(file_name, 'r', encoding='utf-8')
-        output_file = open(out_file_name, 'w+')
+        output_file = open(out_file_name, 'w+', encoding='utf-8')
         test_sentence = []
         test_data = []
         for line in test_file:
@@ -160,6 +150,8 @@ class StructuredPerceptron(object):
             output_file.write('\n')
 
 
-training_sentences = parse_training_file('data/EN/dev.in')
+training_sentences = parse_training_file('data/EN/train')
 sp = StructuredPerceptron()
 sp.train(training_sentences)
+sp.predict('data/EN/dev.in', 'data/EN/dev.p5.out')
+sp.predict('data/EN/dev.in', 'data/EN/dev.p5.out')

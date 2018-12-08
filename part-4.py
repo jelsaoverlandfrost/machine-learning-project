@@ -423,3 +423,5 @@ def secondviterbi(testname, trainname, resultname, k):
         resultfile.write("\n")
     finally:
         resultfile.close()
+
+secondviterbi('data/CN/dev.in', 'data/CN/train', 'data/CN/dev.p4.out', 1)

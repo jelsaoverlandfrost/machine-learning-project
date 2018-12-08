@@ -1,4 +1,3 @@
-###Part 3
 
 def protoemission(listy, listx):
     print(listy)
@@ -7,9 +6,7 @@ def protoemission(listy, listx):
     ydictionary = {}
     for i in range(len(listy)):
         if listx[i] not in dictionary:
-            #            dictionary[listx[i]][listy[i]]=1.0
-            newdic = {}
-            newdic[listy[i]] = 1.0
+            newdic = {listy[i]: 1.0}
             dictionary[listx[i]] = newdic
         if listy[i] not in dictionary[listx[i]]:
             dictionary[listx[i]][listy[i]] = 1.0
@@ -22,8 +19,6 @@ def protoemission(listy, listx):
 
     return dictionary, ydictionary
 
-
-#    print(y,counter,intercount(listy,y)+k)
 
 def finalemission(dic, ydic, x, y, k):
     if x not in dic:
@@ -345,3 +340,5 @@ def viterbi(testname, trainname, resultname, k):
         resultfile.write("\n")
     finally:
         resultfile.close()
+
+viterbi('data/SG/dev.in', 'data/SG/train', 'data/SG/dev.p3.out', 1)
