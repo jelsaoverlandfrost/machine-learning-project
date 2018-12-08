@@ -153,5 +153,4 @@ class StructuredPerceptron(object):
 training_sentences = parse_training_file('data/EN/train')
 sp = StructuredPerceptron()
 sp.train(training_sentences)
-sp.predict('data/EN/dev.in', 'data/EN/dev.p5.out')
-sp.predict('data/EN/dev.in', 'data/EN/dev.p5.out')
+sp.predict('test/EN/test.in', 'test/EN/test.out')
