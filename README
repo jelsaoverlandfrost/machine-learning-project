@@ -1,0 +1,24 @@
+Instruction on running the code
+
+For part 2: 
+
+python part-2.py -train 'data/EN/train' -test 'data/EN/dev.in' -output 'data/EN/dev.p2.out' -standard 'data/EN/dev.out'
+Please offer all the four fields, training file location, test input file location, test output file location, and the golden file location.
+
+For part 3: 
+
+Similar with part 2, 
+
+python part-3.py -train 'data/FR/train' -test 'data/FR/dev.in' -output 'data/FR/dev.p3.out' -standard 'data/FR/dev.out'
+Please offer all the four fields, training file location, test input file location, test output file location, and the golden file location.
+
+For part 4:
+
+python part-4.py -train 'data/FR/train' -test 'data/FR/dev.in' -output 'data/FR/dev.p4.out' -standard 'data/FR/dev.out'
+Please offer all the four fields, training file location, test input file location, test output file location, and the golden file location.
+
+For part 5: 
+
+python part-5-structured-perceptron.py -train 'data/FR/train' -test 'data/FR/dev.in' -output 'data/FR/dev.p3.out' -standard 'data/FR/dev.out' -iterations 20 -rate 0.2
+
+Please provide all the four fields, training file location, test input file location, test output file location, and the golden file location. This program also supports a iterations parameter and a learning rate parameter which would be used to train the perceptron. They are optional parameters, with some default value preset.
